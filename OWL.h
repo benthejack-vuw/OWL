@@ -1,11 +1,18 @@
+typedef struct{
+  bool empty;
+  String command;
+  String data;
+}OWLCommand;
+
 class OWL{
 public:
   bool connect(int baud);
+  void statusPin(int pin);
   bool establishContact();
- 
   void sendCommand(String command, String arg);
-    
-  int await_i();
-  float await_f();
-  String await_s();
+  bool isResponseQueued();
+  OWLCommand awaitReply();
+  OWLCommand pollSerial();
+private:
+  int _statusPin;
 };
