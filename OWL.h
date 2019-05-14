@@ -6,7 +6,7 @@ typedef struct{
 
 class OWL{
 public:
-  bool connect(int baud);
+  bool connect(long baud);
   void statusPin(int pin);
   bool establishContact();
   void sendCommand(String command, String arg);

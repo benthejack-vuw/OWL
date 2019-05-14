@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "OWL.h"
 
-bool OWL::connect(int baud){
+bool OWL::connect(long baud){
   Serial.begin(baud);
   while (!Serial) {
      // wait for serial port to connect. Needed for native USB port only
@@ -35,16 +35,12 @@ OWLCommand OWL::awaitReply(){
   bool toggle = false;
 
   while(!Serial.available()){
-    if(_statusPin >= 0){
-        digitalWrite(_statusPin, toggle);
-        toggle = !toggle;
-    }
-    delay(200);
+    delay(2);
   }
 
-  if(_statusPin >= 0){
-    digitalWrite(_statusPin, LOW);
-  }
+  // if(_statusPin >= 0){
+  //   digitalWrite(_statusPin, LOW);
+  // }
 
   return pollSerial();
 }
